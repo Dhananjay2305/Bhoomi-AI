@@ -9,19 +9,19 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col pb-24">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-16 pb-12 h-[calc(100vh-80px)] min-h-[550px] max-h-[750px] flex items-center">
+      <section className="relative pt-6 lg:pt-16 pb-12 min-h-[650px] h-screen lg:h-[calc(100vh-80px)] lg:min-h-[550px] max-h-[850px] flex items-start lg:items-center">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-white">
-          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-bottom lg:object-contain lg:object-[right_center]" />
+          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-[80%_bottom] lg:object-contain lg:object-[right_center]" />
           <div className="absolute top-0 left-0 right-0 bottom-0 lg:w-[65%] bg-gradient-to-b from-white via-white/90 to-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent"></div>
           {/* Bottom fade to match the dark stats bar */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#2a3028] to-transparent"></div>
         </div>
 
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12 relative z-10 w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
-            className="flex-1 space-y-4 lg:space-y-5 max-w-2xl text-center lg:text-left pt-8 lg:pt-0"
+            className="flex-1 space-y-4 lg:space-y-5 max-w-2xl text-center lg:text-left pt-4 lg:pt-0"
           >
             <div className="inline-flex items-center justify-center lg:justify-start gap-1.5 text-emerald-700 font-bold text-xs sm:text-sm tracking-wide w-full lg:w-auto">
               Smart Soil Intelligence <Leaf size={16} /> <Sparkles size={14} />
