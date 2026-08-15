@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Activity, Battery, Wifi, Cloud, Cpu, Sparkles, Star, ChevronDown, Leaf, Mic, Droplet } from 'lucide-react';
+import { ArrowRight, Activity, Battery, Wifi, Cloud, Cpu, Sparkles, Star, ChevronDown, Leaf, Mic, Droplet } from 'lucide-react';
 import { useBhoomiData } from '../contexts/MockDataProvider';
 
 export default function LandingPage() {

@@ -102,7 +102,7 @@ export default function Analytics() {
                 <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} minTickGap={20} />
                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#64748b' }} domain={[0, 100]} />
                 <Tooltip content={<CustomTooltip />} />
-                <Area type="monotone" dataKey="moisture" stroke="#3b82f6" strokeWidth={3} sm:strokeWidth={4} fillOpacity={1} fill="url(#colorMoisture)" activeDot={{ r: 6, strokeWidth: 0 }} />
+                <Area type="monotone" dataKey="moisture" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorMoisture)" activeDot={{ r: 6, strokeWidth: 0 }} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
