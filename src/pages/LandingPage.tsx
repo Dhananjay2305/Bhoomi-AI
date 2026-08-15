@@ -68,15 +68,6 @@ export default function LandingPage() {
             </div>
           </motion.div>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex-1 relative w-full h-[350px] sm:h-[400px] lg:h-[480px] flex items-center justify-center lg:justify-end mt-8 lg:mt-0"
-          >
-            <div className="w-[90%] sm:w-[80%] lg:w-[90%] xl:w-full h-full relative flex items-center justify-center lg:justify-end">
-              <div className="absolute inset-0 bg-gradient-to-tr from-bhoomi-400/20 to-transparent rounded-full blur-3xl"></div>
-              <img src="/bhoomi_device.jpg" alt="Bhoomi Device" className="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-cover rounded-[40px] shadow-2xl border-4 border-white/80 dark:border-slate-800" />
-            </div>
-          </motion.div>
         </div>
       </section>
 
