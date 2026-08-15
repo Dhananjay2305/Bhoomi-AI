@@ -159,14 +159,12 @@ export default function DeviceManagement() {
             className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[32px] border border-white/50 dark:border-slate-800/50 shadow-xl shadow-slate-200/20 dark:shadow-none overflow-hidden flex flex-col xl:flex-row mb-8 relative"
           >
             {/* Left Side: Device Render */}
-            <div className="xl:w-[40%] bg-gradient-to-br from-bhoomi-50 to-bhoomi-100/50 dark:from-bhoomi-900/20 dark:to-slate-900 p-10 flex flex-col items-center justify-center relative overflow-hidden border-r border-slate-200/50 dark:border-slate-800/50">
-              {/* Subtle texture/glow */}
-              <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#22c55e 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-bhoomi-400/20 blur-[80px] rounded-full"></div>
-              
-              <div className="relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-500 flex items-center justify-center w-full h-full min-h-[400px]">
-                <img src="/bhoomi_device.jpg" alt="Bhoomi AI IoT Sensor Device" className="w-[85%] max-w-[420px] object-contain rounded-3xl" style={{ filter: 'drop-shadow(0 25px 25px rgb(0 0 0 / 0.15))' }} />
-              </div>
+            <div className="xl:w-[40%] relative overflow-hidden border-r border-slate-200/50 dark:border-slate-800/50 min-h-[400px] bg-slate-100">
+              <img 
+                src="/bhoomi_device.jpg" 
+                alt="Bhoomi AI IoT Sensor Device" 
+                className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
+              />
             </div>
 
             {/* Right Side: Details & Data */}
