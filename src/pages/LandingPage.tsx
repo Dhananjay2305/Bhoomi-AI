@@ -9,11 +9,11 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col pb-24">
       {/* 1. HERO SECTION */}
-      <section className="relative pt-20 lg:pt-24 pb-16 min-h-[600px] lg:min-h-[650px] flex items-center">
+      <section className="relative pt-16 pb-12 h-[calc(100vh-80px)] min-h-[550px] max-h-[750px] flex items-center">
         {/* Background Overlay */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-center" />
-          <div className="absolute top-0 left-0 bottom-0 w-full lg:w-[55%] bg-gradient-to-r from-white via-white/95 to-transparent"></div>
+        <div className="absolute inset-0 z-0 overflow-hidden bg-white">
+          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-contain object-right lg:object-[right_center]" />
+          <div className="absolute top-0 left-0 bottom-0 w-full lg:w-[65%] bg-gradient-to-r from-white via-white/95 to-transparent"></div>
           {/* Bottom fade to match the dark stats bar */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#2a3028] to-transparent"></div>
         </div>
