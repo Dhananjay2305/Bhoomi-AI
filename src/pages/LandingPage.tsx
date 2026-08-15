@@ -12,8 +12,8 @@ export default function LandingPage() {
       <section className="relative pt-6 lg:pt-16 pb-12 min-h-[650px] h-screen lg:h-[calc(100vh-80px)] lg:min-h-[550px] max-h-[850px] flex items-start lg:items-center">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-white">
-          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-[80%_bottom] lg:object-contain lg:object-[right_center]" />
-          <div className="absolute top-0 left-0 right-0 bottom-0 lg:w-[65%] bg-gradient-to-b from-white via-white/90 to-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent"></div>
+          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-[70%_center] lg:object-contain lg:object-[right_center]" />
+          <div className="absolute top-0 left-0 right-0 bottom-0 lg:w-[65%] bg-gradient-to-b from-white from-40% via-white/60 via-60% to-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent"></div>
           {/* Bottom fade to match the dark stats bar */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#2a3028] to-transparent"></div>
         </div>
