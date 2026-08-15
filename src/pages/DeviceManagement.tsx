@@ -1,4 +1,3 @@
-import React from 'react';
 import { useBhoomiData } from '../contexts/MockDataProvider';
 import { Cpu, Plus, Activity, MapPin, Settings, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';

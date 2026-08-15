@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useBhoomiData } from '../contexts/MockDataProvider';
 import { Activity, Thermometer, Droplets, Zap, Leaf, CheckCircle2, ChevronDown, CloudRain } from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer } from 'recharts';

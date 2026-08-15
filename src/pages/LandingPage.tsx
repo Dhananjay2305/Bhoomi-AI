@@ -1,12 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Activity, Battery, Wifi, Cloud, Cpu, Sparkles, MapPin, Play, Star, ChevronDown, Leaf, Mic, Droplet } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Activity, Battery, Wifi, Cloud, Cpu, Sparkles, Star, ChevronDown, Leaf, Mic, Droplet } from 'lucide-react';
 import { useBhoomiData } from '../contexts/MockDataProvider';
 
 export default function LandingPage() {
-  const { latestData } = useBhoomiData();
-  const isOnline = latestData && (new Date().getTime() - new Date(latestData.created_at).getTime()) < 60000;
+  // Mock data context used for demonstrations if needed
+  useBhoomiData();
 
   return (
     <div className="flex flex-col pb-24">
