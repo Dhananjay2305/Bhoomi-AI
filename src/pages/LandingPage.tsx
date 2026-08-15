@@ -21,48 +21,48 @@ export default function LandingPage() {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
-            className="flex-1 space-y-5 max-w-2xl"
+            className="flex-1 space-y-5 max-w-2xl text-center lg:text-left"
           >
-            <div className="inline-flex items-center gap-1.5 text-emerald-700 font-bold text-sm tracking-wide">
+            <div className="inline-flex items-center justify-center lg:justify-start gap-1.5 text-emerald-700 font-bold text-sm tracking-wide w-full lg:w-auto">
               Smart Soil Intelligence <Leaf size={16} /> <Sparkles size={14} />
             </div>
             
-            <h1 className="text-6xl lg:text-[76px] font-extrabold text-[#0B1521] leading-[1.05] tracking-tight font-display">
+            <h1 className="text-4xl md:text-5xl lg:text-[76px] font-extrabold text-[#0B1521] leading-[1.05] tracking-tight font-display">
               AI That <br className="hidden lg:block"/>
               Understands <br className="hidden lg:block"/>
               Your <span className="text-[#105e32]">Soil</span> Before <br className="hidden lg:block"/>
               You Plant.
             </h1>
             
-            <p className="text-xl text-slate-600 leading-relaxed font-alt font-medium pt-2">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-alt font-medium pt-2">
               Real-time soil monitoring, AI crop recommendation,<br className="hidden lg:block"/>
               smart irrigation, and voice assistance in your language.
             </p>
             
-            <div className="flex flex-wrap items-center gap-3 py-4">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 py-4">
               <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-[14px] shadow-sm">
                  <div className="bg-[#e6f4ea] text-[#1e8e3e] p-1.5 rounded-lg"><Leaf size={16}/></div>
-                 <span className="text-xs font-bold text-slate-700 leading-tight">Real-time<br/>Monitoring</span>
+                 <span className="text-xs font-bold text-slate-700 leading-tight text-left">Real-time<br/>Monitoring</span>
               </div>
               <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-[14px] shadow-sm">
                  <div className="bg-[#e8f0fe] text-[#1a73e8] p-1.5 rounded-lg"><Cpu size={16}/></div>
-                 <span className="text-xs font-bold text-slate-700 leading-tight">AI Powered<br/>Insights</span>
+                 <span className="text-xs font-bold text-slate-700 leading-tight text-left">AI Powered<br/>Insights</span>
               </div>
               <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-[14px] shadow-sm">
                  <div className="bg-[#f3e8fd] text-[#9334e6] p-1.5 rounded-lg"><Mic size={16}/></div>
-                 <span className="text-xs font-bold text-slate-700 leading-tight">Voice<br/>Assistant</span>
+                 <span className="text-xs font-bold text-slate-700 leading-tight text-left">Voice<br/>Assistant</span>
               </div>
               <div className="flex items-center gap-3 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-[14px] shadow-sm">
                  <div className="bg-[#fef7e0] text-[#f9ab00] p-1.5 rounded-lg"><Droplet size={16}/></div>
-                 <span className="text-xs font-bold text-slate-700 leading-tight">Smart<br/>Irrigation</span>
+                 <span className="text-xs font-bold text-slate-700 leading-tight text-left">Smart<br/>Irrigation</span>
               </div>
             </div>
             
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button className="flex items-center gap-2 px-8 py-4 bg-[#105e32] text-white rounded-full font-bold text-lg hover:bg-[#0c4424] transition-all shadow-lg">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+              <button className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-4 bg-[#105e32] text-white rounded-full font-bold text-lg hover:bg-[#0c4424] transition-all shadow-lg min-h-[48px]">
                 Connect My Device <ArrowRight size={20} />
               </button>
-              <button className="flex items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg hover:bg-slate-50 transition-all shadow-md border border-slate-200">
+              <button className="w-full sm:w-auto flex justify-center items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-full font-bold text-lg hover:bg-slate-50 transition-all shadow-md border border-slate-200 min-h-[48px]">
                 View Live Demo
               </button>
             </div>
@@ -70,9 +70,12 @@ export default function LandingPage() {
 
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex-1 relative w-full h-[480px] hidden lg:flex items-center justify-end"
+            className="flex-1 relative w-full h-[350px] sm:h-[400px] lg:h-[480px] flex items-center justify-center lg:justify-end mt-8 lg:mt-0"
           >
-            {/* Floating cards removed as requested */}
+            <div className="w-[90%] sm:w-[80%] lg:w-[90%] xl:w-full h-full relative flex items-center justify-center lg:justify-end">
+              <div className="absolute inset-0 bg-gradient-to-tr from-bhoomi-400/20 to-transparent rounded-full blur-3xl"></div>
+              <img src="/bhoomi_device.jpg" alt="Bhoomi Device" className="relative z-10 w-full max-w-[320px] lg:max-w-[400px] object-cover rounded-[40px] shadow-2xl border-4 border-white/80 dark:border-slate-800" />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -80,37 +83,37 @@ export default function LandingPage() {
       {/* 2. STATS BAR */}
       <section className="relative z-20 -mt-20 mx-4 lg:mx-8 mb-32">
         <div className="bg-[#2a3028]/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/5 overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-8 py-8 flex flex-wrap justify-between items-center gap-8 lg:gap-4 divide-y lg:divide-y-0 lg:divide-x divide-white/10 text-white">
+          <div className="max-w-[1400px] mx-auto px-6 sm:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-y-0 text-white text-center">
             
-            <div className="flex items-center gap-4 flex-1 pt-4 lg:pt-0 lg:justify-center">
-              <div className="text-white/40"><Cloud size={32} strokeWidth={1.5}/></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-white/40 mb-2"><Cloud size={32} strokeWidth={1.5}/></div>
               <div>
-                <div className="text-3xl font-black tracking-tight">10K+</div>
-                <div className="text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Farmers Trust Us</div>
+                <div className="text-2xl sm:text-3xl font-black tracking-tight">10K+</div>
+                <div className="text-[10px] sm:text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Farmers Trust Us</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 flex-1 pt-4 lg:pt-0 lg:pl-8 lg:justify-center">
-              <div className="text-white/40"><Cpu size={32} strokeWidth={1.5}/></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-white/40 mb-2"><Cpu size={32} strokeWidth={1.5}/></div>
               <div>
-                <div className="text-3xl font-black tracking-tight">25K+</div>
-                <div className="text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Devices Connected</div>
+                <div className="text-2xl sm:text-3xl font-black tracking-tight">25K+</div>
+                <div className="text-[10px] sm:text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Devices Connected</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 flex-1 pt-4 lg:pt-0 lg:pl-8 lg:justify-center">
-              <div className="text-white/40"><Activity size={32} strokeWidth={1.5}/></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-white/40 mb-2"><Activity size={32} strokeWidth={1.5}/></div>
               <div>
-                <div className="text-3xl font-black tracking-tight">1.2M+</div>
-                <div className="text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Data Points Analyzed</div>
+                <div className="text-2xl sm:text-3xl font-black tracking-tight">1.2M+</div>
+                <div className="text-[10px] sm:text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Data Points Analyzed</div>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 flex-1 pt-4 lg:pt-0 lg:pl-8 lg:justify-center">
-              <div className="text-white/40"><Leaf size={32} strokeWidth={1.5}/></div>
+            <div className="flex flex-col items-center gap-2">
+              <div className="text-white/40 mb-2"><Leaf size={32} strokeWidth={1.5}/></div>
               <div>
-                <div className="text-3xl font-black tracking-tight">30%+</div>
-                <div className="text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Increase in Yield</div>
+                <div className="text-2xl sm:text-3xl font-black tracking-tight">30%+</div>
+                <div className="text-[10px] sm:text-xs text-white/60 font-semibold tracking-wide uppercase mt-1">Increase in Yield</div>
               </div>
             </div>
             
@@ -119,29 +122,29 @@ export default function LandingPage() {
       </section>
 
       {/* 3. PRODUCT SHOWCASE */}
-      <section className="text-center max-w-4xl mx-auto px-6">
+      <section className="text-center max-w-4xl mx-auto px-6 mb-20">
         <h2 className="text-3xl lg:text-5xl font-bold mb-6 font-display">Military-grade sensors.<br/>Consumer-grade simplicity.</h2>
-        <p className="text-lg text-slate-600 dark:text-slate-400 mb-16 font-alt">Just place the Bhoomi node in your field and turn it on. It instantly connects to the cloud via GSM/Wi-Fi and starts streaming precision telemetry.</p>
-        <div className="relative rounded-[40px] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 p-8 shadow-inner overflow-hidden border border-white/50 dark:border-slate-700/50">
+        <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-10 sm:mb-16 font-alt">Just place the Bhoomi node in your field and turn it on. It instantly connects to the cloud via GSM/Wi-Fi and starts streaming precision telemetry.</p>
+        <div className="relative rounded-[32px] sm:rounded-[40px] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 p-6 sm:p-8 shadow-inner overflow-hidden border border-white/50 dark:border-slate-700/50">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
-            <div className="w-48 h-64 bg-slate-800 dark:bg-black rounded-3xl shadow-2xl relative border-4 border-slate-700 mx-auto flex flex-col items-center justify-between py-6">
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="w-40 sm:w-48 h-56 sm:h-64 bg-slate-800 dark:bg-black rounded-3xl shadow-2xl relative border-4 border-slate-700 mx-auto flex flex-col items-center justify-between py-6">
               <div className="w-2 h-2 rounded-full bg-bhoomi-500 animate-pulse shadow-neon-green"></div>
               <Cpu size={48} className="text-slate-500" />
               <div className="w-12 h-2 bg-slate-700 rounded-full"></div>
             </div>
-            <div className="flex-1 text-left space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm"><Battery className="text-bhoomi-500"/></div>
-                <div><h4 className="font-bold text-lg">Solar Powered</h4><p className="text-sm text-slate-500">Built-in panel for infinite battery life.</p></div>
+            <div className="flex-1 text-left space-y-6 w-full">
+              <div className="flex items-start gap-4 bg-white/40 dark:bg-slate-900/40 p-4 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm shrink-0"><Battery className="text-bhoomi-500"/></div>
+                <div><h4 className="font-bold text-base sm:text-lg">Solar Powered</h4><p className="text-sm text-slate-500">Built-in panel for infinite battery life.</p></div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm"><Wifi className="text-bhoomi-500"/></div>
-                <div><h4 className="font-bold text-lg">Always Connected</h4><p className="text-sm text-slate-500">GSM & Wi-Fi fallback ensures zero data loss.</p></div>
+              <div className="flex items-start gap-4 bg-white/40 dark:bg-slate-900/40 p-4 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm shrink-0"><Wifi className="text-bhoomi-500"/></div>
+                <div><h4 className="font-bold text-base sm:text-lg">Always Connected</h4><p className="text-sm text-slate-500">GSM & Wi-Fi fallback ensures zero data loss.</p></div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm"><Activity className="text-bhoomi-500"/></div>
-                <div><h4 className="font-bold text-lg">6-in-1 Sensor</h4><p className="text-sm text-slate-500">Measures NPK, Moisture, pH, and Temp at 3 depths.</p></div>
+              <div className="flex items-start gap-4 bg-white/40 dark:bg-slate-900/40 p-4 rounded-2xl md:bg-transparent md:p-0 md:rounded-none">
+                <div className="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm shrink-0"><Activity className="text-bhoomi-500"/></div>
+                <div><h4 className="font-bold text-base sm:text-lg">6-in-1 Sensor</h4><p className="text-sm text-slate-500">Measures NPK, Moisture, pH, and Temp at 3 depths.</p></div>
               </div>
             </div>
           </div>
@@ -149,10 +152,10 @@ export default function LandingPage() {
       </section>
 
       {/* 4. HOW IT WORKS TIMELINE */}
-      <section className="max-w-5xl mx-auto px-6">
-        <h2 className="text-3xl font-bold mb-16 text-center font-display">How Bhoomi AI Works</h2>
+      <section className="max-w-5xl mx-auto px-6 mb-20">
+        <h2 className="text-3xl lg:text-4xl font-bold mb-12 sm:mb-16 text-center font-display">How Bhoomi AI Works</h2>
         <div className="relative">
-          <div className="absolute top-0 left-8 md:left-1/2 w-1 h-full bg-gradient-to-b from-bhoomi-300 via-bhoomi-500 to-emerald-400 -translate-x-1/2 rounded-full"></div>
+          <div className="absolute top-0 left-6 sm:left-8 md:left-1/2 w-1 h-full bg-gradient-to-b from-bhoomi-300 via-bhoomi-500 to-emerald-400 md:-translate-x-1/2 rounded-full"></div>
           
           {[
             { step: 1, title: 'Place Sensor', desc: 'Install the probe in the soil profile.' },
@@ -163,14 +166,14 @@ export default function LandingPage() {
           ].map((item, index) => (
             <motion.div 
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }}
-              key={item.step} className={`relative flex items-center gap-8 mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              key={item.step} className={`relative flex items-center gap-4 sm:gap-8 mb-8 sm:mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
             >
               <div className="hidden md:block flex-1 text-right"></div>
-              <div className="absolute left-8 md:left-1/2 w-8 h-8 bg-bhoomi-500 rounded-full border-4 border-earth-50 dark:border-bhoomi-950 -translate-x-1/2 flex items-center justify-center text-xs font-bold text-white z-10 shadow-lg">{item.step}</div>
-              <div className={`flex-1 pl-16 md:pl-0 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
-                <div className="glass-panel p-6 inline-block w-full md:max-w-sm hover:-translate-y-1 transition-transform">
-                  <h4 className="font-bold text-xl mb-2">{item.title}</h4>
-                  <p className="text-slate-500 dark:text-slate-400">{item.desc}</p>
+              <div className="absolute left-6 sm:left-8 md:left-1/2 w-8 h-8 bg-bhoomi-500 rounded-full border-4 border-earth-50 dark:border-bhoomi-950 -translate-x-1/2 flex items-center justify-center text-xs font-bold text-white z-10 shadow-lg">{item.step}</div>
+              <div className={`flex-1 pl-12 sm:pl-16 md:pl-0 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'}`}>
+                <div className="glass-panel p-5 sm:p-6 inline-block w-full md:max-w-sm hover:-translate-y-1 transition-transform">
+                  <h4 className="font-bold text-lg sm:text-xl mb-1 sm:mb-2">{item.title}</h4>
+                  <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400">{item.desc}</p>
                 </div>
               </div>
             </motion.div>

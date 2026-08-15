@@ -69,10 +69,10 @@ export default function VoiceAssistantPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto h-[80vh] flex flex-col lg:flex-row gap-8 pb-12">
+    <div className="max-w-6xl mx-auto h-[calc(100vh-100px)] lg:h-[80vh] flex flex-col-reverse lg:flex-row gap-4 lg:gap-8 pb-4 lg:pb-12">
       {/* Left Sidebar: Language & Status */}
-      <div className="w-full lg:w-1/3 flex flex-col gap-6">
-        <div className="glass-card p-6">
+      <div className="w-full lg:w-1/3 flex flex-col gap-4 lg:gap-6 shrink-0 lg:shrink">
+        <div className="glass-card p-6 hidden lg:block">
           <div className="flex items-center gap-2 mb-6 text-slate-800 dark:text-slate-200 font-bold text-lg font-display">
             <Globe className="text-bhoomi-500"/> Interface Language
           </div>
@@ -94,21 +94,33 @@ export default function VoiceAssistantPage() {
           </div>
         </div>
 
-        <div className="glass-panel p-8 text-center flex-1 flex flex-col items-center justify-center relative overflow-hidden group">
+        <div className="glass-panel p-4 sm:p-6 lg:p-8 text-center flex-none lg:flex-1 flex flex-col items-center justify-center relative overflow-hidden group">
           <div className="absolute inset-0 bg-gradient-to-b from-bhoomi-400/5 to-emerald-500/10 pointer-events-none"></div>
           
+          <div className="lg:hidden w-full mb-4">
+            <select 
+              value={selectedLang.code}
+              onChange={(e) => setSelectedLang(languages.find(l => l.code === e.target.value) || languages[3])}
+              className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm font-bold text-slate-700 dark:text-slate-300 outline-none appearance-none text-center shadow-sm"
+            >
+              {languages.map(lang => (
+                <option key={lang.code} value={lang.code} className="text-slate-900">{lang.localName} ({lang.name})</option>
+              ))}
+            </select>
+          </div>
+
           <button 
             onClick={isPlaying ? handleStop : handleAskBhoomi}
-            className={`relative flex items-center justify-center w-32 h-32 rounded-full transition-all duration-500 ${
+            className={`relative flex items-center justify-center w-20 h-20 lg:w-32 lg:h-32 rounded-full transition-all duration-500 ${
               isPlaying 
                 ? 'bg-red-500 shadow-[0_0_60px_rgba(239,68,68,0.6)]' 
                 : 'bg-gradient-to-br from-slate-900 to-slate-800 dark:from-white dark:to-slate-200 hover:scale-105 hover:shadow-[0_0_40px_rgba(47,164,92,0.4)]'
             }`}
           >
             {isPlaying ? (
-              <StopCircle size={48} className="text-white" />
+              <StopCircle className="w-8 h-8 lg:w-12 lg:h-12 text-white" />
             ) : (
-              <Mic size={48} className="text-white dark:text-slate-900" />
+              <Mic className="w-8 h-8 lg:w-12 lg:h-12 text-white dark:text-slate-900" />
             )}
             
             {/* Pulsing rings */}
@@ -120,27 +132,27 @@ export default function VoiceAssistantPage() {
             )}
           </button>
           
-          <h3 className="text-xl font-bold mt-8 mb-2 text-slate-900 dark:text-white font-display">
+          <h3 className="text-lg lg:text-xl font-bold mt-4 lg:mt-8 mb-1 lg:mb-2 text-slate-900 dark:text-white font-display">
             {isPlaying ? 'Speaking...' : 'Tap to ask Bhoomi'}
           </h3>
-          <p className="text-sm text-slate-500 dark:text-slate-400 font-medium max-w-[200px]">
+          <p className="text-xs lg:text-sm text-slate-500 dark:text-slate-400 font-medium max-w-[200px]">
             {isPlaying ? 'Tap the icon to stop the voice assistant.' : 'Get an instant localized voice report on your field.'}
           </p>
         </div>
       </div>
 
       {/* Right Area: Conversational Interface */}
-      <div className="w-full lg:w-2/3 glass-card flex flex-col overflow-hidden relative">
+      <div className="w-full lg:w-2/3 glass-card flex flex-col flex-1 overflow-hidden relative min-h-[400px] lg:min-h-0">
         <div className="absolute top-0 right-0 w-64 h-64 bg-bhoomi-500/10 blur-[80px] rounded-full pointer-events-none"></div>
         
-        <div className="p-6 border-b border-slate-200/50 dark:border-slate-700/50 flex justify-between items-center bg-white/40 dark:bg-slate-900/40">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-bhoomi-500 to-emerald-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-bhoomi-500/30">
-              <Sparkles size={20}/>
+        <div className="p-4 lg:p-6 border-b border-slate-200/50 dark:border-slate-700/50 flex justify-between items-center bg-white/40 dark:bg-slate-900/40">
+          <div className="flex items-center gap-3 lg:gap-4">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-bhoomi-500 to-emerald-400 rounded-full flex items-center justify-center text-white shadow-lg shadow-bhoomi-500/30">
+              <Sparkles className="w-4 h-4 lg:w-5 lg:h-5"/>
             </div>
             <div>
-              <h2 className="font-bold text-lg text-slate-900 dark:text-white font-display">Bhoomi Intelligence</h2>
-              <div className="flex items-center gap-1.5 text-xs font-bold text-bhoomi-600 dark:text-bhoomi-400">
+              <h2 className="font-bold text-base lg:text-lg text-slate-900 dark:text-white font-display">Bhoomi Intelligence</h2>
+              <div className="flex items-center gap-1.5 text-[10px] lg:text-xs font-bold text-bhoomi-600 dark:text-bhoomi-400">
                 <span className="w-2 h-2 rounded-full bg-bhoomi-500 animate-pulse"></span> Online & Analyzing
               </div>
             </div>

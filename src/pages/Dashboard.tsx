@@ -37,10 +37,10 @@ export default function Dashboard() {
       </div>
 
       {/* 1. Hero Section */}
-      <div className="relative z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-[32px] overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-lg transition-shadow">
+      <div className="relative z-10 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-slate-200/50 dark:border-slate-800/50 rounded-[24px] sm:rounded-[32px] overflow-hidden flex flex-col lg:flex-row shadow-sm hover:shadow-lg transition-shadow">
         
         {/* Left Stats */}
-        <div className="lg:w-[60%] p-8 lg:p-12 flex flex-col justify-center">
+        <div className="lg:w-[60%] p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
           <div className="flex items-center gap-3 mb-6">
             <span className="flex items-center gap-1.5 px-3 py-1 bg-bhoomi-100 dark:bg-bhoomi-900/30 text-bhoomi-700 dark:text-bhoomi-400 text-xs font-bold rounded-full uppercase tracking-wider">
               <span className="w-1.5 h-1.5 bg-bhoomi-500 rounded-full animate-pulse"></span>
@@ -77,12 +77,12 @@ export default function Dashboard() {
         </div>
 
         {/* Right Device Render */}
-        <div className="lg:w-[40%] bg-gradient-to-br from-bhoomi-50 to-white dark:from-bhoomi-900/20 dark:to-slate-900 p-8 flex items-center justify-center relative min-h-[350px]">
+        <div className="lg:w-[40%] bg-gradient-to-br from-bhoomi-50 to-white dark:from-bhoomi-900/20 dark:to-slate-900 p-8 flex items-center justify-center relative h-[250px] sm:h-[300px] lg:h-auto lg:min-h-[350px]">
           <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#22c55e 1.5px, transparent 1.5px)', backgroundSize: '30px 30px' }}></div>
           <img 
             src="/bhoomi_device.jpg" 
             alt="Bhoomi AI Device" 
-            className="absolute inset-0 w-full h-full object-cover z-10 scale-110 translate-y-4 hover:scale-125 hover:translate-y-0 transition-transform duration-1000 ease-out" 
+            className="absolute inset-0 w-full h-full object-cover z-10 scale-110 lg:translate-y-4 hover:scale-110 lg:hover:scale-125 hover:translate-y-0 transition-transform duration-1000 ease-out" 
             style={{ maskImage: 'linear-gradient(to top, transparent 5%, black 40%)', WebkitMaskImage: 'linear-gradient(to top, transparent 5%, black 40%)' }}
           />
         </div>
@@ -90,15 +90,44 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 relative z-10">
         
+        {/* Health Score Card (Mobile Only - Moved up) */}
+        <div className="block xl:hidden">
+          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 border border-slate-200/50 dark:border-slate-800/50 shadow-sm flex flex-col items-center relative overflow-hidden">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest self-start mb-2">Overall Soil Health</h3>
+            
+            <div className="relative w-40 h-40 sm:w-48 sm:h-48 mt-4 mb-2">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={[{value: 97}, {value: 3}]} cx="50%" cy="50%" innerRadius="70%" outerRadius="85%" startAngle={210} endAngle={-30} dataKey="value" stroke="none" cornerRadius={10}>
+                    <Cell fill="#22c55e" />
+                    <Cell fill="rgba(148, 163, 184, 0.2)" />
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <div className="absolute inset-0 flex flex-col items-center justify-center pt-2">
+                <span className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white font-display">97</span>
+                <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">Excellent</span>
+              </div>
+            </div>
+            
+            <div className="w-full bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl flex items-center justify-between">
+              <div className="flex items-center gap-2 text-sm font-bold text-slate-700 dark:text-slate-300">
+                <Target size={16} className="text-bhoomi-500"/> AI Confidence
+              </div>
+              <span className="text-sm font-black text-slate-900 dark:text-white">High (98%)</span>
+            </div>
+          </div>
+        </div>
+
         {/* Main Analytics Area (Left 2 Columns) */}
         <div className="xl:col-span-2 space-y-6">
           
           {/* 2. KPI Row */}
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {kpis.map((kpi, idx) => (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.1 }}
-                key={idx} className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[24px] p-5 border border-slate-200/50 dark:border-slate-800/50 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+                key={idx} className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[24px] p-4 sm:p-5 border border-slate-200/50 dark:border-slate-800/50 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className={`p-2.5 rounded-xl ${kpi.bg} ${kpi.color} group-hover:scale-110 transition-transform`}>
@@ -236,8 +265,8 @@ export default function Dashboard() {
         {/* AI & Intelligence Sidebar (Right Column) */}
         <div className="space-y-6">
           
-          {/* 3. Soil Health Score (Gauge) */}
-          <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[32px] p-8 border border-slate-200/50 dark:border-slate-800/50 shadow-sm flex flex-col items-center relative overflow-hidden">
+          {/* 3. Soil Health Score (Gauge) - Hidden on Mobile */}
+          <div className="hidden xl:flex bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[32px] p-8 border border-slate-200/50 dark:border-slate-800/50 shadow-sm flex-col items-center relative overflow-hidden">
             <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest self-start mb-2">Overall Soil Health</h3>
             
             <div className="relative w-48 h-48 mt-4 mb-2">

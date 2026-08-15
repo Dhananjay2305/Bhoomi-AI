@@ -41,7 +41,7 @@ export default function DeviceManagement() {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex bg-earth-50 dark:bg-bhoomi-950 overflow-hidden font-sans">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen bg-earth-50 dark:bg-bhoomi-950 lg:overflow-hidden font-sans relative lg:fixed lg:inset-0 lg:z-40">
       {/* Dynamic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-bhoomi-300/10 dark:bg-bhoomi-900/20 blur-[100px] animate-blob"></div>
@@ -98,16 +98,16 @@ export default function DeviceManagement() {
       </aside>
 
       {/* Main Column */}
-      <main className="flex-1 flex flex-col h-full overflow-hidden z-10">
+      <main className="flex-1 flex flex-col h-full lg:overflow-hidden z-10 w-full">
         {/* Top Header */}
-        <header className="h-20 px-8 flex items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md">
+        <header className="h-auto lg:h-20 px-4 sm:px-8 py-4 lg:py-0 flex flex-col lg:flex-row lg:items-center justify-between border-b border-slate-200/50 dark:border-slate-800/50 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md gap-4 lg:gap-0">
           <div>
             <h1 className="text-2xl font-bold text-slate-900 dark:text-white font-display">Devices Overview</h1>
             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
           </div>
           
-          <div className="flex items-center gap-6">
-            <div className="hidden md:flex items-center gap-4 bg-white/60 dark:bg-slate-800/60 px-5 py-2.5 rounded-full border border-slate-200/50 dark:border-slate-700/50 shadow-sm">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 lg:gap-6 w-full lg:w-auto">
+            <div className="flex items-center gap-4 bg-white/60 dark:bg-slate-800/60 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-slate-200/50 dark:border-slate-700/50 shadow-sm w-full sm:w-auto justify-between sm:justify-start">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isOnline ? 'bg-bhoomi-400' : 'bg-red-400'}`}></span>
@@ -115,7 +115,7 @@ export default function DeviceManagement() {
                 </span>
                 <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{isOnline ? 'Node Active' : 'Offline'}</span>
               </div>
-              <div className="w-px h-4 bg-slate-300 dark:bg-slate-600"></div>
+              <div className="w-px h-4 bg-slate-300 dark:bg-slate-600 hidden sm:block"></div>
               <div className="flex items-center gap-1.5 text-xs font-bold text-slate-600 dark:text-slate-400">
                 <Wifi size={14} className={latestData?.signal_strength && latestData.signal_strength > -70 ? 'text-bhoomi-500' : 'text-amber-500'} /> 
                 {latestData?.signal_strength || -63} dBm
@@ -126,17 +126,17 @@ export default function DeviceManagement() {
               </div>
             </div>
             
-            <button className="flex items-center gap-2 px-6 py-2.5 bg-bhoomi-500 hover:bg-bhoomi-600 text-white rounded-full font-bold transition-all shadow-lg shadow-bhoomi-500/30 hover:scale-105 text-sm">
-              <Plus size={18} /> Provision New Node
+            <button className="flex justify-center items-center gap-2 px-6 py-2.5 bg-bhoomi-500 hover:bg-bhoomi-600 text-white rounded-full font-bold transition-all shadow-lg shadow-bhoomi-500/30 hover:scale-105 text-sm w-full sm:w-auto">
+              <Plus size={18} /> <span className="sm:hidden lg:inline">Provision Node</span><span className="hidden sm:inline lg:hidden">Provision New Node</span>
             </button>
           </div>
         </header>
 
         {/* Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+        <div className="flex-1 lg:overflow-y-auto p-4 sm:p-6 lg:p-8 custom-scrollbar">
           
           {/* KPI Row */}
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-6 lg:mb-8">
             {kpis.map((kpi, idx) => (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}
@@ -156,10 +156,10 @@ export default function DeviceManagement() {
           {/* Main Showcase Card */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
-            className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[32px] border border-white/50 dark:border-slate-800/50 shadow-xl shadow-slate-200/20 dark:shadow-none overflow-hidden flex flex-col xl:flex-row mb-8 relative"
+            className="bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl rounded-[24px] sm:rounded-[32px] border border-white/50 dark:border-slate-800/50 shadow-xl shadow-slate-200/20 dark:shadow-none overflow-hidden flex flex-col xl:flex-row mb-8 relative"
           >
             {/* Left Side: Device Render */}
-            <div className="xl:w-[40%] relative overflow-hidden border-r border-slate-200/50 dark:border-slate-800/50 min-h-[400px] bg-slate-100">
+            <div className="xl:w-[40%] relative overflow-hidden border-b xl:border-b-0 xl:border-r border-slate-200/50 dark:border-slate-800/50 min-h-[300px] xl:min-h-[400px] bg-slate-100 flex-shrink-0">
               <img 
                 src="/bhoomi_device.jpg" 
                 alt="Bhoomi AI IoT Sensor Device" 
@@ -168,9 +168,9 @@ export default function DeviceManagement() {
             </div>
 
             {/* Right Side: Details & Data */}
-            <div className="xl:w-[60%] p-8 lg:p-10 flex flex-col justify-between">
+            <div className="xl:w-[60%] p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               
-              <div className="flex flex-col sm:flex-row justify-between items-start mb-8 gap-4">
+              <div className="flex flex-col sm:flex-row justify-between items-start mb-6 lg:mb-8 gap-4">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <h2 className="text-3xl font-black text-slate-900 dark:text-white font-display">{primaryDevice?.name || 'Field-A Node 1'}</h2>
@@ -242,11 +242,11 @@ export default function DeviceManagement() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 mt-8">
-                <button className="flex-1 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold hover:shadow-lg hover:shadow-slate-900/20 dark:hover:shadow-white/20 transition-all active:scale-95 text-sm">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6 lg:mt-8">
+                <button className="flex-1 py-3 sm:py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold hover:shadow-lg hover:shadow-slate-900/20 dark:hover:shadow-white/20 transition-all active:scale-95 text-sm w-full">
                   Configure Node
                 </button>
-                <button className="flex-1 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 text-sm shadow-sm">
+                <button className="flex-1 py-3 sm:py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 text-sm shadow-sm w-full">
                   View Diagnostics
                 </button>
               </div>
@@ -255,18 +255,18 @@ export default function DeviceManagement() {
           </motion.div>
 
           {/* Bottom Banner */}
-          <div className="bg-gradient-to-r from-bhoomi-800 to-bhoomi-600 rounded-[32px] p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl flex items-center justify-between">
+          <div className="bg-gradient-to-r from-bhoomi-800 to-bhoomi-600 rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6 md:gap-0">
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
             
-            <div className="relative z-10 max-w-xl">
-              <h3 className="text-3xl font-black font-display mb-3">Bhoomi AI Connected Ecosystem</h3>
-              <p className="text-bhoomi-100 mb-8 font-medium">Your farm is connected. Real-time sensor data is being analyzed by our AI to provide optimal irrigation and nutrient recommendations.</p>
-              <button className="px-6 py-3 bg-white text-bhoomi-700 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform">
+            <div className="relative z-10 max-w-xl flex flex-col items-center md:items-start">
+              <h3 className="text-2xl sm:text-3xl font-black font-display mb-3">Bhoomi AI Connected Ecosystem</h3>
+              <p className="text-bhoomi-100 mb-6 sm:mb-8 font-medium text-sm sm:text-base">Your farm is connected. Real-time sensor data is being analyzed by our AI to provide optimal irrigation and nutrient recommendations.</p>
+              <button className="px-6 py-3 bg-white text-bhoomi-700 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform w-full sm:w-auto justify-center">
                 <Mic size={18} /> Ask Bhoomi AI
               </button>
             </div>
 
-            <div className="relative z-10 hidden md:block">
+            <div className="relative z-10 hidden md:block shrink-0">
               <div className="w-48 h-48 bg-white/10 rounded-full blur-xl absolute -inset-4"></div>
               {/* Abstract farm illustration representation */}
               <div className="w-32 h-32 relative">
