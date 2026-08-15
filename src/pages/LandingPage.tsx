@@ -12,8 +12,8 @@ export default function LandingPage() {
       <section className="relative pt-16 pb-12 h-[calc(100vh-80px)] min-h-[550px] max-h-[750px] flex items-center">
         {/* Background Overlay */}
         <div className="absolute inset-0 z-0 overflow-hidden bg-white">
-          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-contain object-right lg:object-[right_center]" />
-          <div className="absolute top-0 left-0 bottom-0 w-full lg:w-[65%] bg-gradient-to-r from-white via-white/95 to-transparent"></div>
+          <img src="/bhoomi-bg.png" alt="Bhoomi AI Field" className="w-full h-full object-cover object-bottom lg:object-contain lg:object-[right_center]" />
+          <div className="absolute top-0 left-0 right-0 bottom-0 lg:w-[65%] bg-gradient-to-b from-white via-white/90 to-transparent lg:bg-gradient-to-r lg:from-white lg:via-white/95 lg:to-transparent"></div>
           {/* Bottom fade to match the dark stats bar */}
           <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#2a3028] to-transparent"></div>
         </div>
@@ -21,20 +21,20 @@ export default function LandingPage() {
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}
-            className="flex-1 space-y-5 max-w-2xl text-center lg:text-left"
+            className="flex-1 space-y-4 lg:space-y-5 max-w-2xl text-center lg:text-left pt-8 lg:pt-0"
           >
-            <div className="inline-flex items-center justify-center lg:justify-start gap-1.5 text-emerald-700 font-bold text-sm tracking-wide w-full lg:w-auto">
+            <div className="inline-flex items-center justify-center lg:justify-start gap-1.5 text-emerald-700 font-bold text-xs sm:text-sm tracking-wide w-full lg:w-auto">
               Smart Soil Intelligence <Leaf size={16} /> <Sparkles size={14} />
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-[76px] font-extrabold text-[#0B1521] leading-[1.05] tracking-tight font-display">
+            <h1 className="text-4xl md:text-5xl lg:text-[76px] font-extrabold text-[#0B1521] leading-[1.1] lg:leading-[1.05] tracking-tight font-display">
               AI That <br className="hidden lg:block"/>
               Understands <br className="hidden lg:block"/>
               Your <span className="text-[#105e32]">Soil</span> Before <br className="hidden lg:block"/>
               You Plant.
             </h1>
             
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-alt font-medium pt-2">
+            <p className="text-base sm:text-lg md:text-xl text-slate-700 lg:text-slate-600 leading-relaxed font-alt font-medium pt-2 lg:pt-0 max-w-[90%] sm:max-w-full mx-auto lg:mx-0">
               Real-time soil monitoring, AI crop recommendation,<br className="hidden lg:block"/>
               smart irrigation, and voice assistance in your language.
             </p>
