@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-earth-50 text-slate-900 antialiased dark:bg-bhoomi-950 dark:text-earth-50 font-sans selection:bg-bhoomi-200 selection:text-bhoomi-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/60 backdrop-blur-xl border border-white/40 dark:bg-slate-900/40 dark:border-white/10 shadow-glass transition-all duration-300;
+  }
+  
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-2xl border border-white/50 dark:bg-bhoomi-900/30 dark:border-bhoomi-700/30 shadow-glass hover:shadow-glass-hover transition-all duration-500 rounded-[24px];
+  }
+
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-3xl border border-white/60 dark:bg-bhoomi-900/40 dark:border-bhoomi-600/20 shadow-glass rounded-[32px];
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-slate-600;
+  }
+}
