@@ -72,61 +72,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }}
             className="flex-1 relative w-full h-[480px] hidden lg:flex items-center justify-end"
           >
-            <div className="grid grid-cols-2 gap-4 mt-16 mr-4 z-20">
-              
-              {/* Moisture Card */}
-              <div className="bg-white p-5 rounded-3xl shadow-2xl flex flex-col w-[170px] animate-float">
-                <div className="w-full flex items-center gap-1.5 mb-2 text-slate-500">
-                   <Droplet size={14} className="text-[#1a73e8]" strokeWidth={3}/>
-                   <span className="text-[10px] font-black tracking-widest uppercase">Moisture</span>
-                </div>
-                <div className="text-4xl font-black text-slate-800 mb-1">42%</div>
-                <div className="text-xs text-[#1e8e3e] font-bold mb-3">Optimal</div>
-                <svg viewBox="0 0 100 20" className="w-full h-5 stroke-[#1a73e8] fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5,15 Q12,5 20,10 T35,8 T50,15 T65,10 T80,12 L95,8" />
-                </svg>
-              </div>
-
-              {/* pH Level Card */}
-              <div className="bg-white p-5 rounded-3xl shadow-2xl flex flex-col w-[170px] animate-float" style={{ animationDelay: '1s' }}>
-                <div className="w-full flex items-center gap-1.5 mb-2 text-slate-500">
-                   <Leaf size={14} className="text-[#1e8e3e]" strokeWidth={3}/>
-                   <span className="text-[10px] font-black tracking-widest uppercase">pH Level</span>
-                </div>
-                <div className="text-4xl font-black text-slate-800 mb-1">6.4</div>
-                <div className="text-xs text-[#1e8e3e] font-bold mb-3">Slightly Acidic</div>
-                <svg viewBox="0 0 100 20" className="w-full h-5 stroke-[#1e8e3e] fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5,15 Q15,18 25,12 T45,15 T65,8 T85,10 L95,8" />
-                </svg>
-              </div>
-
-              {/* Temperature Card */}
-              <div className="bg-white p-5 rounded-3xl shadow-2xl flex flex-col w-[170px] animate-float" style={{ animationDelay: '0.5s' }}>
-                <div className="w-full flex items-center gap-1.5 mb-2 text-slate-500">
-                   <Activity size={14} className="text-[#f9ab00]" strokeWidth={3}/>
-                   <span className="text-[10px] font-black tracking-widest uppercase">Temperature</span>
-                </div>
-                <div className="text-[32px] leading-none font-black text-slate-800 mb-2">28.3<span className="text-xl">°C</span></div>
-                <div className="text-xs text-[#1e8e3e] font-bold mb-3">Optimal</div>
-                <svg viewBox="0 0 100 20" className="w-full h-5 stroke-[#f9ab00] fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5,15 Q15,12 25,15 T45,8 T65,5 T85,12 L95,10" />
-                </svg>
-              </div>
-
-              {/* Soil Health Card */}
-              <div className="bg-white p-5 rounded-3xl shadow-2xl flex flex-col w-[170px] animate-float" style={{ animationDelay: '1.5s' }}>
-                <div className="w-full flex items-center gap-1.5 mb-2 text-slate-500">
-                   <CheckCircle2 size={14} className="text-[#9334e6]" strokeWidth={3}/>
-                   <span className="text-[10px] font-black tracking-widest uppercase">Soil Health</span>
-                </div>
-                <div className="text-4xl font-black text-slate-800 mb-1">82<span className="text-lg text-slate-400">/100</span></div>
-                <div className="text-xs text-[#1e8e3e] font-bold mb-3">Good</div>
-                <svg viewBox="0 0 100 20" className="w-full h-5 stroke-[#9334e6] fill-none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5,12 Q15,5 25,8 T45,15 T65,8 T85,12 L95,5" />
-                </svg>
-              </div>
-
-            </div>
+            {/* Floating cards removed as requested */}
           </motion.div>
         </div>
       </section>
