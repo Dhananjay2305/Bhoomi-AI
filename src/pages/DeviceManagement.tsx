@@ -97,13 +97,10 @@ export default function DeviceManagement() {
           >
             {/* Left Side: Device Render */}
             <div className="xl:w-[40%] relative overflow-hidden border-b xl:border-b-0 xl:border-r border-slate-200/50 dark:border-slate-800/50 min-h-[300px] xl:min-h-[400px] bg-slate-100 flex-shrink-0">
-              <video 
-                src="/bhoomi_device_video.mp4" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700" 
+              <img 
+                src="/bhoomi_device.jpg" 
+                alt="Bhoomi AI IoT Sensor Device" 
+                className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
               />
             </div>
 
@@ -206,12 +203,15 @@ export default function DeviceManagement() {
               </button>
             </div>
 
-            <div className="relative z-10 hidden md:block shrink-0">
-              <div className="w-48 h-48 bg-white/10 rounded-full blur-xl absolute -inset-4"></div>
-              {/* Abstract farm illustration representation */}
-              <div className="w-32 h-32 relative">
-                <Sprout size={120} className="text-white/80 drop-shadow-2xl" />
-              </div>
+            <div className="relative z-10 hidden md:block shrink-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+              <video 
+                src="/bhoomi_device_video.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="w-48 h-48 lg:w-64 lg:h-64 object-cover" 
+              />
             </div>
           </div>
 
