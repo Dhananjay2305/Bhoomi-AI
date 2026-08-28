@@ -7,6 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const navItems = [
   { path: '/', label: 'Home' },
   { path: '/dashboard', label: 'Dashboard' },
+  { path: '/irrigation', label: 'Irrigation' },
+  { path: '/crop-recommendation', label: 'Crops' },
+  { path: '/disease-detection', label: 'Disease' },
   { path: '/devices', label: 'Devices' },
   { path: '/analytics', label: 'Analytics' },
   { path: '/voice', label: 'Voice Assistant' },

@@ -13,7 +13,7 @@ const languages = [
 ];
 
 export default function VoiceAssistantPage() {
-  const { latestData, recommendations } = useBhoomiData();
+  const { latestData, recommendations, weather, pumpStatus } = useBhoomiData();
   const [selectedLang, setSelectedLang] = useState(languages[3]); // Default English
   const [isPlaying, setIsPlaying] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -29,12 +29,12 @@ export default function VoiceAssistantPage() {
   const getTranslatedMessage = () => {
     if (!latestData || !recommendations) return "";
     const m = Math.round(latestData.moisture);
-    const p = latestData.ph.toFixed(1);
+    // Removed unused p variable
     
-    if (selectedLang.code === 'te-IN') return `మీ నేలలో తేమ ${m} శాతం ఉంది. pH ${p} ఉంది. ${recommendations.irrigation === 'Water Now' ? 'వెంటనే నీరు పెట్టాలి.' : 'ఈరోజు నీరు అవసరం లేదు.'} టమోటా మరియు మిర్చి పంటలు ఈ నేలకు అనుకూలంగా ఉన్నాయి.`;
-    if (selectedLang.code === 'hi-IN') return `आपकी मिट्टी में नमी ${m} प्रतिशत है। pH ${p} है। ${recommendations.irrigation === 'Water Now' ? 'तुरंत पानी दें।' : 'आज सिंचाई की आवश्यकता नहीं है।'} यह मिट्टी टमाटर और मिर्च के लिए बहुत अच्छी है।`;
+    if (selectedLang.code === 'te-IN') return `మీ నేలలో తేమ ${m} శాతం ఉంది. వర్షం పడే అవకాశం ${weather.rainProbability} శాతం. పంప్ ప్రస్తుత్తం ${pumpStatus === 'ON' ? 'ఆన్' : 'ఆఫ్'} లో ఉంది. ${recommendations.irrigation === 'Water Now' ? 'వెంటనే నీరు పెట్టాలి.' : 'ఈరోజు నీరు అవసరం లేదు.'}`;
+    if (selectedLang.code === 'hi-IN') return `आपकी मिट्टी में नमी ${m} प्रतिशत है। बारिश की संभावना ${weather.rainProbability} प्रतिशत है। पंप अभी ${pumpStatus === 'ON' ? 'चालू' : 'बंद'} है। ${recommendations.irrigation === 'Water Now' ? 'तुरंत पानी दें।' : 'आज सिंचाई की आवश्यकता नहीं है।'}`;
     
-    return `Soil moisture is at ${m} percent. pH is ${p}. ${recommendations.irrigationExplanation} ${recommendations.explanation}`;
+    return `Soil moisture is at ${m} percent. Rain probability is ${weather.rainProbability} percent. The pump is currently ${pumpStatus}. ${recommendations.irrigationExplanation}`;
   };
 
   const handleAskBhoomi = () => {

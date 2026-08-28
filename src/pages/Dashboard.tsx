@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 
 export default function Dashboard() {
-  const { latestData, historyData, devices, alerts } = useBhoomiData();
+  const { latestData, historyData, devices, alerts, weather, pumpStatus, pumpMode, recommendations } = useBhoomiData();
   const [chartFilter, setChartFilter] = useState('24h');
 
   const primaryDevice = devices[0];
@@ -215,17 +215,17 @@ export default function Dashboard() {
                     <Sun size={32} />
                   </div>
                   <div>
-                    <div className="text-3xl font-black text-slate-900 dark:text-white">32°C</div>
-                    <div className="text-sm font-medium text-slate-500">Sunny • AQI 42</div>
+                    <div className="text-3xl font-black text-slate-900 dark:text-white">{weather.temperature}°C</div>
+                    <div className="text-sm font-medium text-slate-500">{weather.condition}</div>
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { l: 'Humidity', v: '64%', i: Droplets },
+                  { l: 'Humidity', v: `${weather.humidity}%`, i: Droplets },
                   { l: 'Wind', v: '12 km/h', i: Wind },
-                  { l: 'Rain Prob.', v: '72%', i: CloudRain },
-                  { l: 'Sunrise', v: '05:42 AM', i: Sun }
+                  { l: 'Rain Prob.', v: `${weather.rainProbability}%`, i: CloudRain },
+                  { l: 'Pump Status', v: pumpStatus, i: Target }
                 ].map((w, i) => (
                   <div key={i} className="flex items-center gap-2 p-2 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
                     <w.i size={16} className="text-slate-400"/>
@@ -309,23 +309,22 @@ export default function Dashboard() {
                   <Sprout size={16} /> <span className="text-xs font-bold uppercase">Best Crop</span>
                 </div>
                 <div className="flex justify-between items-baseline mb-2">
-                  <span className="text-xl font-bold">Tomato</span>
-                  <span className="text-xs bg-bhoomi-500/20 text-bhoomi-300 px-2 py-0.5 rounded-full font-bold">94% Match</span>
+                  <span className="text-xl font-bold">{recommendations?.crops?.[0]?.name || 'Analyzing...'}</span>
+                  <span className="text-xs bg-bhoomi-500/20 text-bhoomi-300 px-2 py-0.5 rounded-full font-bold">{recommendations?.crops?.[0]?.match}% Match</span>
                 </div>
                 <div className="text-xs text-slate-300 flex justify-between">
-                  <span>Yield: 14 t/ac</span>
-                  <span className="text-bhoomi-300 font-bold">Est: ₹1.1L</span>
+                  <span className="truncate pr-2">{recommendations?.crops?.[0]?.reason}</span>
                 </div>
               </div>
 
               {/* Irrigation Forecast */}
               <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/10">
                 <div className="flex items-center gap-2 mb-2 text-blue-300">
-                  <Droplets size={16} /> <span className="text-xs font-bold uppercase">Irrigation</span>
+                  <Droplets size={16} /> <span className="text-xs font-bold uppercase">Irrigation Decision</span>
                 </div>
-                <p className="text-sm font-medium mb-2">No irrigation required today.</p>
+                <p className="text-sm font-medium mb-2">{recommendations?.irrigationExplanation || 'Analyzing...'}</p>
                 <div className="text-xs text-slate-300">
-                  Next: Tomorrow 6:00 AM (18 L/m²)
+                  Pump Status: <strong className={pumpStatus === 'ON' ? 'text-blue-400' : 'text-slate-400'}>{pumpStatus}</strong> ({pumpMode})
                 </div>
               </div>
 
@@ -334,7 +333,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-2 mb-2 text-purple-300">
                   <FlaskConical size={16} /> <span className="text-xs font-bold uppercase">Fertilizer</span>
                 </div>
-                <p className="text-sm font-medium">Nitrogen slightly low. Apply 25 kg urea per acre within 48h.</p>
+                <p className="text-sm font-medium">{recommendations?.fertilizer || 'Analyzing...'}</p>
               </div>
             </div>
           </div>
