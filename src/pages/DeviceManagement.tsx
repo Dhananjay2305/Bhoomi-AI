@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useBhoomiData } from '../contexts/MockDataProvider';
 import { 
-  Home, LayoutDashboard, Cpu, BarChart2, Mic, Bell, FileText, Settings, HelpCircle,
-  Plus, Wifi, Battery, MapPin, Activity, Droplets, Thermometer, FlaskConical, Sprout,
-  RefreshCw, Settings2, ChevronDown, CheckCircle, AlertTriangle, PlayCircle, Map, Target
+  Cpu, Mic, Plus, Wifi, Battery, MapPin, Activity, Droplets, Thermometer, FlaskConical, Sprout,
+  RefreshCw, Settings2, ChevronDown, CheckCircle, AlertTriangle, PlayCircle, Target
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
@@ -25,77 +24,15 @@ export default function DeviceManagement() {
     { label: 'AI Recs Today', value: '4', icon: Target, color: 'text-purple-500', bg: 'bg-purple-100 dark:bg-purple-900/30' },
   ];
 
-  const sidebarNav = [
-    { label: 'Home', icon: Home, active: false },
-    { label: 'Dashboard', icon: LayoutDashboard, active: false },
-    { label: 'Devices', icon: Cpu, active: true },
-    { label: 'Analytics', icon: BarChart2, active: false },
-    { label: 'Irrigation', icon: Droplets, active: false },
-    { label: 'AI Insights', icon: Target, active: false },
-    { label: 'Voice Assistant', icon: Mic, active: false },
-    { label: 'Alerts', icon: Bell, active: false },
-    { label: 'Reports', icon: FileText, active: false },
-    { label: 'Farm Mgmt', icon: Map, active: false },
-    { label: 'Settings', icon: Settings, active: false },
-    { label: 'Help & Support', icon: HelpCircle, active: false },
-  ];
+  // Removed sidebarNav
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen bg-earth-50 dark:bg-bhoomi-950 lg:overflow-hidden font-sans relative lg:fixed lg:inset-0 lg:z-40">
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen bg-transparent lg:overflow-hidden font-sans relative">
       {/* Dynamic Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] right-[-5%] w-[40%] h-[40%] rounded-full bg-bhoomi-300/10 dark:bg-bhoomi-900/20 blur-[100px] animate-blob"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-earth-300/20 dark:bg-earth-800/10 blur-[120px] animate-blob animation-delay-2000"></div>
       </div>
-
-      {/* Left Sidebar */}
-      <aside className="w-72 border-r border-slate-200/50 dark:border-slate-800/50 bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl flex flex-col z-10 hidden lg:flex relative">
-        <div className="p-6 flex items-center gap-3">
-          <div className="bg-gradient-to-tr from-bhoomi-600 to-bhoomi-400 p-2 rounded-xl text-white shadow-lg shadow-bhoomi-500/30">
-            <Sprout size={24} />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white font-display">
-            Bhoomi <span className="text-bhoomi-600 dark:text-bhoomi-400">AI</span>
-          </span>
-        </div>
-
-        <div className="flex-1 overflow-y-auto px-4 py-2 space-y-1 custom-scrollbar">
-          {sidebarNav.map((item, i) => (
-            <button key={i} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${item.active ? 'bg-bhoomi-500 text-white shadow-md shadow-bhoomi-500/20' : 'text-slate-600 dark:text-slate-400 hover:bg-white/50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-white'}`}>
-              <item.icon size={18} />
-              {item.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="p-4">
-          <div className="bg-gradient-to-br from-bhoomi-500 to-bhoomi-700 p-5 rounded-2xl text-white relative overflow-hidden shadow-xl shadow-bhoomi-500/20 group">
-            <div className="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-all"></div>
-            <h4 className="font-bold mb-1 flex items-center gap-2"><Mic size={16} /> Ask Bhoomi AI</h4>
-            <p className="text-xs text-bhoomi-100 mb-4">Get voice guidance in your language.</p>
-            <div className="flex gap-2 relative z-10">
-              <select className="bg-white/20 border border-white/30 rounded-lg text-xs px-2 py-1.5 outline-none backdrop-blur-sm cursor-pointer text-white">
-                <option value="te" className="text-slate-900">Telugu</option>
-                <option value="hi" className="text-slate-900">Hindi</option>
-                <option value="en" className="text-slate-900">English</option>
-              </select>
-              <button className="flex-1 bg-white text-bhoomi-700 font-bold text-xs rounded-lg py-1.5 hover:bg-bhoomi-50 transition-colors shadow-sm">Talk Now</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="p-4 border-t border-slate-200/50 dark:border-slate-800/50">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 font-bold">
-              K
-            </div>
-            <div>
-              <p className="text-sm font-bold text-slate-900 dark:text-white">Kumar Farm</p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Premium Plan</p>
-            </div>
-          </div>
-        </div>
-      </aside>
 
       {/* Main Column */}
       <main className="flex-1 flex flex-col h-full lg:overflow-hidden z-10 w-full">
