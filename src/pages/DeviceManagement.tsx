@@ -192,26 +192,27 @@ export default function DeviceManagement() {
           </motion.div>
 
           {/* Bottom Banner */}
-          <div className="bg-gradient-to-r from-bhoomi-800 to-bhoomi-600 rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6 md:gap-0">
-            <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+          <div className="rounded-[24px] sm:rounded-[32px] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-6 md:gap-0 min-h-[250px] lg:min-h-[300px]">
+            {/* Background Video */}
+            <video 
+              src="/bhoomi_device_video.mp4" 
+              autoPlay 
+              loop 
+              muted 
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover z-0" 
+            />
             
-            <div className="relative z-10 max-w-xl flex flex-col items-center md:items-start">
-              <h3 className="text-2xl sm:text-3xl font-black font-display mb-3">Bhoomi AI Connected Ecosystem</h3>
-              <p className="text-bhoomi-100 mb-6 sm:mb-8 font-medium text-sm sm:text-base">Your farm is connected. Real-time sensor data is being analyzed by our AI to provide optimal irrigation and nutrient recommendations.</p>
-              <button className="px-6 py-3 bg-white text-bhoomi-700 rounded-full font-bold shadow-lg flex items-center gap-2 hover:scale-105 transition-transform w-full sm:w-auto justify-center">
+            {/* Overlay for readability */}
+            <div className="absolute inset-0 bg-bhoomi-900/60 z-0"></div>
+            <div className="absolute inset-0 opacity-20 z-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }}></div>
+            
+            <div className="relative z-10 max-w-xl flex flex-col items-center md:items-start w-full">
+              <h3 className="text-2xl sm:text-3xl font-black font-display mb-3 text-white drop-shadow-md">Bhoomi AI Connected Ecosystem</h3>
+              <p className="text-white/90 drop-shadow mb-6 sm:mb-8 font-medium text-sm sm:text-base">Your farm is connected. Real-time sensor data is being analyzed by our AI to provide optimal irrigation and nutrient recommendations.</p>
+              <button className="px-6 py-3 bg-white text-bhoomi-700 rounded-full font-bold shadow-xl flex items-center gap-2 hover:scale-105 transition-transform w-full sm:w-auto justify-center">
                 <Mic size={18} /> Ask Bhoomi AI
               </button>
-            </div>
-
-            <div className="relative z-10 hidden md:block shrink-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 w-64 lg:w-80 aspect-video">
-              <video 
-                src="/bhoomi_device_video.mp4" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                className="w-full h-full object-cover" 
-              />
             </div>
           </div>
 
