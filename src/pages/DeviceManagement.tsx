@@ -203,14 +203,14 @@ export default function DeviceManagement() {
               </button>
             </div>
 
-            <div className="relative z-10 hidden md:block shrink-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20">
+            <div className="relative z-10 hidden md:block shrink-0 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 w-64 lg:w-80 aspect-video">
               <video 
                 src="/bhoomi_device_video.mp4" 
                 autoPlay 
                 loop 
                 muted 
                 playsInline
-                className="w-48 h-48 lg:w-64 lg:h-64 object-cover" 
+                className="w-full h-full object-cover" 
               />
             </div>
           </div>
