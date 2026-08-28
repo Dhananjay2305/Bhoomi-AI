@@ -79,9 +79,12 @@ export default function Dashboard() {
         {/* Right Device Render */}
         <div className="lg:w-[40%] bg-gradient-to-br from-bhoomi-50 to-white dark:from-bhoomi-900/20 dark:to-slate-900 p-8 flex items-center justify-center relative h-[250px] sm:h-[300px] lg:h-auto lg:min-h-[350px]">
           <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#22c55e 1.5px, transparent 1.5px)', backgroundSize: '30px 30px' }}></div>
-          <img 
-            src="/bhoomi_device.jpg" 
-            alt="Bhoomi AI Device" 
+          <video 
+            src="/bhoomi_device_video.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
             className="absolute inset-0 w-full h-full object-cover z-10 scale-110 lg:translate-y-4 hover:scale-110 lg:hover:scale-125 hover:translate-y-0 transition-transform duration-1000 ease-out" 
             style={{ maskImage: 'linear-gradient(to top, transparent 5%, black 40%)', WebkitMaskImage: 'linear-gradient(to top, transparent 5%, black 40%)' }}
           />

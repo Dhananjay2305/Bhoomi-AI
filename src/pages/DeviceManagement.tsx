@@ -97,10 +97,13 @@ export default function DeviceManagement() {
           >
             {/* Left Side: Device Render */}
             <div className="xl:w-[40%] relative overflow-hidden border-b xl:border-b-0 xl:border-r border-slate-200/50 dark:border-slate-800/50 min-h-[300px] xl:min-h-[400px] bg-slate-100 flex-shrink-0">
-              <img 
-                src="/bhoomi_device.jpg" 
-                alt="Bhoomi AI IoT Sensor Device" 
-                className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700" 
+              <video 
+                src="/bhoomi_device_video.mp4" 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700" 
               />
             </div>
 
