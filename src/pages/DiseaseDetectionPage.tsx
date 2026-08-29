@@ -3,7 +3,7 @@ import { useBhoomiData } from '../contexts/MockDataProvider';
 import { Camera, Upload, AlertTriangle, CheckCircle, ShieldCheck, Leaf, Loader2, Info, MessageSquare, History } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { analyzePlantImage, DiseaseResult, DiseaseScanRecord } from '../services/diseaseService';
+import { analyzePlantImage, type DiseaseResult, type DiseaseScanRecord } from '../services/diseaseService';
 
 export default function DiseaseDetectionPage() {
   const { latestData, weather, farmProfile, diseaseHistory, addDiseaseScan } = useBhoomiData();

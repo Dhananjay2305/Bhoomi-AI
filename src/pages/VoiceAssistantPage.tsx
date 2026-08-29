@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useBhoomiData } from '../contexts/MockDataProvider';
-import { Mic, Globe, AlertCircle, Sparkles, StopCircle, Send } from 'lucide-react';
+import { Mic, Globe, AlertCircle, Sparkles, StopCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const languages = [

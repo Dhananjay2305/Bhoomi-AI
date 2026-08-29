@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
-import { DiseaseScanRecord } from '../services/diseaseService';
+import type { DiseaseScanRecord } from '../services/diseaseService';
 
 export interface SoilData {
   id: string;
