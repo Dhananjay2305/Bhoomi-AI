@@ -233,6 +233,12 @@ export default function DiseaseDetectionPage() {
                          <p className="text-lg font-bold">{result.severity}</p>
                       </div>
                     </div>
+                    {result.affected_area && (
+                      <div className="flex items-center justify-between border-t border-current/20 pt-4 mt-4">
+                         <p className="text-xs font-bold uppercase opacity-80">Affected Area</p>
+                         <p className="text-lg font-bold">{result.affected_area}</p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Contextual Integration */}
@@ -248,7 +254,7 @@ export default function DiseaseDetectionPage() {
                     <div className="space-y-5">
                       <div>
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-2 flex items-center gap-2">
-                          <AlertTriangle size={16} className="text-amber-500" /> Symptoms
+                          <AlertTriangle size={16} className="text-amber-500" /> Symptoms Detected
                         </h4>
                         <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
                           {result.symptoms.map((symptom, i) => <li key={i}>{symptom}</li>)}
@@ -257,7 +263,7 @@ export default function DiseaseDetectionPage() {
                       
                       <div>
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-2 flex items-center gap-2">
-                          <CheckCircle size={16} className="text-bhoomi-500" /> Recommended Actions
+                          <CheckCircle size={16} className="text-bhoomi-500" /> Recommended Action
                         </h4>
                         <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
                           {result.recommendations.map((rec, i) => <li key={i}>{rec}</li>)}
@@ -282,6 +288,21 @@ export default function DiseaseDetectionPage() {
                   >
                     <MessageSquare size={18} className="text-bhoomi-500" />
                     Ask Bhoomi AI about this
+                  </button>
+                  
+                  {/* New Analysis Button */}
+                  <button 
+                    onClick={() => {
+                      setResult(null);
+                      setImagePreview(null);
+                      setError(null);
+                      if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
+                      }
+                    }}
+                    className="w-full mt-2 flex items-center justify-center gap-2 py-3 border-2 border-bhoomi-500 text-bhoomi-600 dark:text-bhoomi-400 hover:bg-bhoomi-50 dark:hover:bg-bhoomi-900/30 font-bold rounded-xl transition-colors"
+                  >
+                    Analyze Another Leaf
                   </button>
 
                   <div className="pt-4 border-t border-slate-100 dark:border-slate-800">

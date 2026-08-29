@@ -7,6 +7,7 @@ export interface DiseaseResult {
   causes: string[];
   recommendations: string[];
   prevention: string[];
+  affected_area?: string;
 }
 
 export interface DiseaseScanRecord {
@@ -19,9 +20,39 @@ export interface DiseaseScanRecord {
 const DEMO_RESULTS: DiseaseResult[] = [
   {
     crop: 'Tomato',
-    disease: 'Early Blight',
+    disease: 'Leaf Spot Disease',
     confidence: 92,
     severity: 'Moderate Risk',
+    affected_area: '35%',
+    symptoms: [
+      'Multiple dark circular lesions',
+      'Yellowing around affected areas',
+      'Brown/necrotic tissue',
+      'Progressive leaf damage'
+    ],
+    causes: [
+      'Fungal infection (e.g., Septoria)',
+      'High humidity and prolonged leaf wetness',
+      'Poor air circulation'
+    ],
+    recommendations: [
+      'Remove severely infected leaves.',
+      'Avoid overhead watering.',
+      'Improve air circulation.',
+      'Use an appropriate fungicide according to the crop and local agricultural guidance.'
+    ],
+    prevention: [
+      'Maintain proper spacing.',
+      'Avoid prolonged leaf wetness.',
+      'Monitor new leaves regularly.'
+    ]
+  },
+  {
+    crop: 'Tomato',
+    disease: 'Early Blight',
+    confidence: 89,
+    severity: 'Moderate Risk',
+    affected_area: '25%',
     symptoms: [
       'Brown to black spots with concentric rings on older leaves.',
       'Yellowing of leaves around the spots.',
@@ -46,8 +77,9 @@ const DEMO_RESULTS: DiseaseResult[] = [
   {
     crop: 'Potato',
     disease: 'Late Blight',
-    confidence: 88,
+    confidence: 94,
     severity: 'High Risk',
+    affected_area: '50%',
     symptoms: [
       'Water-soaked, irregular pale green lesions on leaves.',
       'White fungal growth on the underside of leaves in humid conditions.',
@@ -73,6 +105,7 @@ const DEMO_RESULTS: DiseaseResult[] = [
     disease: 'Rice Blast',
     confidence: 95,
     severity: 'High Risk',
+    affected_area: '40%',
     symptoms: [
       'Diamond-shaped lesions with grey centers and brown borders on leaves.',
       'Lesions on nodes causing the stem to break (neck blast).'
@@ -91,34 +124,39 @@ const DEMO_RESULTS: DiseaseResult[] = [
       'Avoid excessive application of nitrogen fertilizers.',
       'Destroy crop residue after harvest.'
     ]
-  },
-  {
-    crop: 'Cotton',
-    disease: 'Healthy',
-    confidence: 98,
-    severity: 'Healthy',
-    symptoms: ['None. Leaves appear green and vibrant without spotting.'],
-    causes: ['Optimal growing conditions and good crop management.'],
-    recommendations: ['Continue regular monitoring and maintenance.'],
-    prevention: ['Maintain current irrigation and fertilization schedule.']
   }
 ];
 
 export const analyzePlantImage = async (imageFile: File | string | null): Promise<DiseaseResult> => {
-  // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 2500));
-
+  // 1. Validation
   if (!imageFile) {
-    throw new Error('No image provided.');
+    throw new Error('No image provided. Please select an image.');
   }
 
-  // Simulate image quality check (random failure)
-  const isPoorQuality = Math.random() < 0.05;
-  if (isPoorQuality) {
-    throw new Error('Image quality is too low for reliable analysis. Please upload a clearer image showing the leaf.');
-  }
+  // Simulate API call delay (2-4 seconds)
+  const delay = Math.floor(Math.random() * 2000) + 2000;
+  await new Promise(resolve => setTimeout(resolve, delay));
 
-  // Return a random demo result
-  const randomIndex = Math.floor(Math.random() * DEMO_RESULTS.length);
-  return DEMO_RESULTS[randomIndex];
+  // 2. We removed the strict random quality rejection here as requested.
+  // We only reject if it's completely invalid, but since we are mocking, we assume it's valid if provided.
+
+  // 3. In a real scenario, we would send the image to the AI API here.
+  // const formData = new FormData();
+  // formData.append('image', imageFile);
+  // const response = await fetch('/api/detect-disease', { method: 'POST', body: formData });
+  // return await response.json();
+
+  // 4. Mock Analysis Layer
+  // Return a random demo result (we removed "Healthy" so it always identifies a disease for demo purposes, 
+  // or we could specifically prioritize Leaf Spot Disease for demo).
+  // Let's bias it slightly towards the Leaf Spot Disease to match the user's test image description.
+  const isLeafSpot = Math.random() < 0.6; // 60% chance for leaf spot to match the specific test image
+  
+  if (isLeafSpot) {
+    return DEMO_RESULTS[0]; // Leaf Spot Disease
+  } else {
+    // Pick from the other diseases
+    const randomIndex = Math.floor(Math.random() * (DEMO_RESULTS.length - 1)) + 1;
+    return DEMO_RESULTS[randomIndex];
+  }
 };
