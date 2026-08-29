@@ -64,10 +64,19 @@ export default function DiseaseDetectionPage() {
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'Healthy': return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/50';
-      case 'Low Risk': return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800/50';
-      case 'Moderate Risk': return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-amber-200 dark:border-amber-800/50';
-      case 'High Risk': return 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 border-rose-200 dark:border-rose-800/50';
+      case 'Healthy': 
+      case 'None':
+        return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800/50';
+      case 'Low': 
+      case 'Low Risk':
+        return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200 dark:border-blue-800/50';
+      case 'Moderate': 
+      case 'Moderate Risk':
+        return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-amber-200 dark:border-amber-800/50';
+      case 'High': 
+      case 'Severe':
+      case 'High Risk':
+        return 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 border-rose-200 dark:border-rose-800/50';
       default: return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 border-slate-200 dark:border-slate-700';
     }
   };
@@ -113,17 +122,16 @@ export default function DiseaseDetectionPage() {
                 )}
                 
                 {/* DEMO MODE BADGE */}
-                <div className="absolute top-4 left-4 bg-bhoomi-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg z-10">
-                  Demo Mode
-                </div>
+                {result?.is_demo && (
+                  <div className="absolute top-4 left-4 bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg z-10 flex items-center gap-1">
+                    <AlertTriangle size={14} /> Demo Analysis
+                  </div>
+                )}
               </div>
             ) : (
               <div className="aspect-square md:aspect-[4/3] rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center mb-6 bg-slate-50 dark:bg-slate-800/50 text-slate-400 relative overflow-hidden group">
                 <Leaf size={48} className="mb-4 opacity-50 group-hover:scale-110 transition-transform duration-500 group-hover:text-bhoomi-500" />
-                <p className="font-medium text-sm text-center px-4">Upload a clear photo of the affected leaf</p>
-                <div className="absolute top-4 left-4 bg-bhoomi-500 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest opacity-80">
-                  Demo Mode
-                </div>
+                <p className="font-medium text-sm text-center px-4">Upload a clear photo of the plant leaf</p>
               </div>
             )}
 
@@ -169,14 +177,14 @@ export default function DiseaseDetectionPage() {
             </button>
             
             <div className="mt-4 text-center">
-              <p className="text-xs text-slate-500 font-medium">Supported crops: Tomato, Potato, Rice, Cotton, Chilli</p>
+              <p className="text-xs text-slate-500 font-medium">Any crop or plant leaf is supported</p>
             </div>
           </div>
         </div>
 
         {/* RIGHT: Analysis Results */}
         <div className="space-y-4">
-          <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest pl-2">AI Analysis Result</h3>
+          <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest pl-2">AI Leaf Health Analysis</h3>
           
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-[32px] p-6 border border-slate-200/50 dark:border-slate-800/50 shadow-sm min-h-[500px]">
             <AnimatePresence mode="wait">
@@ -201,6 +209,32 @@ export default function DiseaseDetectionPage() {
                     <div className="h-4 bg-slate-200 dark:bg-slate-800 rounded-full w-5/6 mx-auto animate-pulse delay-150"></div>
                   </div>
                 </motion.div>
+              ) : result && !result.is_leaf ? (
+                <motion.div 
+                  key="not-leaf"
+                  initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  className="h-full flex flex-col items-center justify-center text-center p-8 min-h-[400px]"
+                >
+                  <div className="w-20 h-20 bg-rose-100 text-rose-500 rounded-full flex items-center justify-center mb-6">
+                     <AlertTriangle size={40} />
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">No plant leaf detected</h3>
+                  <p className="text-slate-500 mb-8">Please upload a clear image containing a plant leaf.</p>
+                  
+                  <button 
+                    onClick={() => {
+                      setResult(null);
+                      setImagePreview(null);
+                      setError(null);
+                      if (fileInputRef.current) {
+                        fileInputRef.current.value = '';
+                      }
+                    }}
+                    className="w-full max-w-xs flex items-center justify-center gap-2 py-3 border-2 border-bhoomi-500 text-bhoomi-600 dark:text-bhoomi-400 hover:bg-bhoomi-50 dark:hover:bg-bhoomi-900/30 font-bold rounded-xl transition-colors"
+                  >
+                    Try Again
+                  </button>
+                </motion.div>
               ) : result ? (
                 <motion.div 
                   key="result"
@@ -211,14 +245,14 @@ export default function DiseaseDetectionPage() {
                   <div className={`p-5 rounded-2xl border ${getSeverityColor(result.severity)}`}>
                     <div className="flex items-start justify-between mb-4">
                       <div>
-                        <h4 className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Detected Crop</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Crop</h4>
                         <p className="text-lg font-bold">{result.crop}</p>
                       </div>
                       <div className="text-right">
-                        <h4 className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Condition</h4>
+                        <h4 className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Health Status</h4>
                         <div className="flex items-center gap-1 font-black text-xl">
-                          {result.severity !== 'Healthy' && <AlertTriangle size={20} />}
-                          {result.disease}
+                          {result.health_status !== 'Healthy' && <AlertTriangle size={20} />}
+                          {result.health_status}
                         </div>
                       </div>
                     </div>
@@ -229,28 +263,42 @@ export default function DiseaseDetectionPage() {
                         <p className="text-2xl font-black">{result.confidence}%</p>
                       </div>
                       <div className="text-right">
-                         <p className="text-xs font-bold uppercase opacity-80">Severity</p>
-                         <p className="text-lg font-bold">{result.severity}</p>
+                         <p className="text-xs font-bold uppercase opacity-80">Health Score</p>
+                         <p className="text-2xl font-black">{result.health_score} / 100</p>
                       </div>
                     </div>
-                    {result.affected_area && (
-                      <div className="flex items-center justify-between border-t border-current/20 pt-4 mt-4">
-                         <p className="text-xs font-bold uppercase opacity-80">Affected Area</p>
-                         <p className="text-lg font-bold">{result.affected_area}</p>
+                    
+                    {(result.disease || result.problem) && result.health_status !== 'Healthy' && (
+                      <div className="mt-4 pt-4 border-t border-current/20">
+                         <p className="text-xs font-bold uppercase opacity-80">Detected Problem</p>
+                         <p className="text-lg font-bold">{result.problem || result.disease}</p>
                       </div>
                     )}
+
+                    <div className="flex items-center justify-between border-t border-current/20 pt-4 mt-4">
+                       <div>
+                         <p className="text-xs font-bold uppercase opacity-80">Severity</p>
+                         <p className="text-lg font-bold">{result.severity}</p>
+                       </div>
+                       {result.affected_area && (
+                         <div className="text-right">
+                           <p className="text-xs font-bold uppercase opacity-80">Affected Area</p>
+                           <p className="text-lg font-bold">{result.affected_area}</p>
+                         </div>
+                       )}
+                    </div>
                   </div>
 
                   {/* Contextual Integration */}
                   <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl flex items-center gap-3 border border-slate-100 dark:border-slate-800">
                     <Info size={20} className="text-bhoomi-500 shrink-0" />
                     <p className="text-sm text-slate-700 dark:text-slate-300">
-                      <span className="font-bold">Farm Context:</span> Your {farmProfile.crop} field currently has {latestData?.moisture}% soil moisture and {weather.temperature}°C temperature. {result.disease !== 'Healthy' && 'These conditions might affect disease spread.'}
+                      <span className="font-bold">Farm Context:</span> Your {farmProfile.crop} field currently has {latestData?.moisture}% soil moisture and {weather.temperature}°C temperature. {result.health_status !== 'Healthy' && 'These conditions might affect disease spread.'}
                     </p>
                   </div>
 
                   {/* Details Tabs / Sections */}
-                  {result.disease !== 'Healthy' && (
+                  {result.health_status !== 'Healthy' && (
                     <div className="space-y-5">
                       <div>
                         <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-2 flex items-center gap-2">
@@ -277,6 +325,17 @@ export default function DiseaseDetectionPage() {
                         <ul className="list-disc pl-5 text-sm text-slate-600 dark:text-slate-400 space-y-1">
                           {result.prevention.map((prev, i) => <li key={i}>{prev}</li>)}
                         </ul>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {result.health_status === 'Healthy' && (
+                    <div className="space-y-5">
+                      <div>
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-2 flex items-center gap-2">
+                          <ShieldCheck size={16} className="text-emerald-500" /> Analysis
+                        </h4>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">The leaf appears healthy. Continue normal care and monitor the plant regularly.</p>
                       </div>
                     </div>
                   )}
@@ -341,13 +400,15 @@ export default function DiseaseDetectionPage() {
                       {new Date(scan.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </td>
                     <td className="px-4 py-4 font-bold text-slate-900 dark:text-white">{scan.result.crop}</td>
-                    <td className="px-4 py-4 font-medium text-slate-700 dark:text-slate-300">{scan.result.disease}</td>
+                    <td className="px-4 py-4 font-medium text-slate-700 dark:text-slate-300">
+                      {scan.result.health_status === 'Healthy' ? 'Healthy' : scan.result.problem || scan.result.disease}
+                    </td>
                     <td className="px-4 py-4 text-slate-600 dark:text-slate-400">{scan.result.confidence}%</td>
                     <td className="px-4 py-4">
                       <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${
-                        scan.result.severity === 'High Risk' ? 'bg-rose-100 text-rose-700' :
-                        scan.result.severity === 'Moderate Risk' ? 'bg-amber-100 text-amber-700' :
-                        scan.result.severity === 'Low Risk' ? 'bg-blue-100 text-blue-700' :
+                        (scan.result.severity === 'High' || scan.result.severity === 'Severe') ? 'bg-rose-100 text-rose-700' :
+                        scan.result.severity === 'Moderate' ? 'bg-amber-100 text-amber-700' :
+                        scan.result.severity === 'Low' ? 'bg-blue-100 text-blue-700' :
                         'bg-emerald-100 text-emerald-700'
                       }`}>
                         {scan.result.severity}

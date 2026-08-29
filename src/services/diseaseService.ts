@@ -1,13 +1,18 @@
 export interface DiseaseResult {
+  is_leaf: boolean;
   crop: string;
-  disease: string;
+  health_status: 'Healthy' | 'Unhealthy' | 'Uncertain';
+  health_score: number;
+  disease?: string; // keeping disease for backward compatibility in history, but we'll use 'problem' from API
+  problem?: string;
   confidence: number;
-  severity: 'Healthy' | 'Low Risk' | 'Moderate Risk' | 'High Risk' | 'Unable to Identify';
+  severity: 'None' | 'Low' | 'Moderate' | 'High' | 'Severe' | 'Healthy';
+  affected_area: string;
   symptoms: string[];
   causes: string[];
   recommendations: string[];
   prevention: string[];
-  affected_area?: string;
+  is_demo?: boolean;
 }
 
 export interface DiseaseScanRecord {
@@ -19,10 +24,15 @@ export interface DiseaseScanRecord {
 // Simulated data for Demo Mode
 const DEMO_RESULTS: DiseaseResult[] = [
   {
+    is_leaf: true,
+    is_demo: true,
     crop: 'Tomato',
+    health_status: 'Unhealthy',
+    health_score: 55,
     disease: 'Leaf Spot Disease',
+    problem: 'Leaf Spot Disease',
     confidence: 92,
-    severity: 'Moderate Risk',
+    severity: 'Moderate',
     affected_area: '35%',
     symptoms: [
       'Multiple dark circular lesions',
@@ -48,37 +58,15 @@ const DEMO_RESULTS: DiseaseResult[] = [
     ]
   },
   {
-    crop: 'Tomato',
-    disease: 'Early Blight',
-    confidence: 89,
-    severity: 'Moderate Risk',
-    affected_area: '25%',
-    symptoms: [
-      'Brown to black spots with concentric rings on older leaves.',
-      'Yellowing of leaves around the spots.',
-      'Defoliation starting from the bottom of the plant.'
-    ],
-    causes: [
-      'Fungus (Alternaria solani).',
-      'Warm temperatures combined with high humidity.',
-      'Prolonged leaf wetness.'
-    ],
-    recommendations: [
-      'Remove and destroy infected leaves.',
-      'Apply a copper-based fungicide or chlorothalonil.',
-      'Avoid overhead watering to keep leaves dry.'
-    ],
-    prevention: [
-      'Practice crop rotation (avoid planting nightshades in the same spot).',
-      'Ensure proper spacing for good air circulation.',
-      'Apply organic mulch to prevent soil-borne spores from splashing onto leaves.'
-    ]
-  },
-  {
+    is_leaf: true,
+    is_demo: true,
     crop: 'Potato',
+    health_status: 'Unhealthy',
+    health_score: 30,
     disease: 'Late Blight',
+    problem: 'Late Blight',
     confidence: 94,
-    severity: 'High Risk',
+    severity: 'High',
     affected_area: '50%',
     symptoms: [
       'Water-soaked, irregular pale green lesions on leaves.',
@@ -99,31 +87,6 @@ const DEMO_RESULTS: DiseaseResult[] = [
       'Hill up soil around the base of plants to protect tubers.',
       'Avoid overhead irrigation late in the day.'
     ]
-  },
-  {
-    crop: 'Rice',
-    disease: 'Rice Blast',
-    confidence: 95,
-    severity: 'High Risk',
-    affected_area: '40%',
-    symptoms: [
-      'Diamond-shaped lesions with grey centers and brown borders on leaves.',
-      'Lesions on nodes causing the stem to break (neck blast).'
-    ],
-    causes: [
-      'Fungus (Magnaporthe oryzae).',
-      'High nitrogen fertilization.',
-      'Extended periods of dew or light rain.'
-    ],
-    recommendations: [
-      'Apply systemic fungicides like tricyclazole or isoprothiolane.',
-      'Maintain appropriate water levels in the field.'
-    ],
-    prevention: [
-      'Plant resistant varieties.',
-      'Avoid excessive application of nitrogen fertilizers.',
-      'Destroy crop residue after harvest.'
-    ]
   }
 ];
 
@@ -133,30 +96,48 @@ export const analyzePlantImage = async (imageFile: File | string | null): Promis
     throw new Error('No image provided. Please select an image.');
   }
 
-  // Simulate API call delay (2-4 seconds)
+  // Convert File to base64 if it's a File object
+  let base64Image = imageFile;
+  if (imageFile instanceof File) {
+    base64Image = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(imageFile);
+    });
+  }
+
+  try {
+    const response = await fetch('/api/analyze-leaf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: base64Image })
+    });
+
+    if (response.status !== 503 && response.ok) {
+       const result = await response.json();
+       // Map to interface just to be safe
+       return {
+         ...result,
+         is_demo: false,
+         disease: result.problem // Map problem to disease for legacy compat
+       };
+    }
+    
+    // If it fails or returns 503, log warning and fallback to demo
+    console.warn('AI API unavailable or failed. Falling back to Demo Mode.');
+  } catch (err) {
+    console.warn('Error calling AI API. Falling back to Demo Mode.', err);
+  }
+
+  // 4. Mock Analysis Layer (Fallback)
   const delay = Math.floor(Math.random() * 2000) + 2000;
   await new Promise(resolve => setTimeout(resolve, delay));
 
-  // 2. We removed the strict random quality rejection here as requested.
-  // We only reject if it's completely invalid, but since we are mocking, we assume it's valid if provided.
-
-  // 3. In a real scenario, we would send the image to the AI API here.
-  // const formData = new FormData();
-  // formData.append('image', imageFile);
-  // const response = await fetch('/api/detect-disease', { method: 'POST', body: formData });
-  // return await response.json();
-
-  // 4. Mock Analysis Layer
-  // Return a random demo result (we removed "Healthy" so it always identifies a disease for demo purposes, 
-  // or we could specifically prioritize Leaf Spot Disease for demo).
-  // Let's bias it slightly towards the Leaf Spot Disease to match the user's test image description.
-  const isLeafSpot = Math.random() < 0.6; // 60% chance for leaf spot to match the specific test image
-  
+  const isLeafSpot = Math.random() < 0.6; 
   if (isLeafSpot) {
-    return DEMO_RESULTS[0]; // Leaf Spot Disease
+    return DEMO_RESULTS[0];
   } else {
-    // Pick from the other diseases
-    const randomIndex = Math.floor(Math.random() * (DEMO_RESULTS.length - 1)) + 1;
-    return DEMO_RESULTS[randomIndex];
+    return DEMO_RESULTS[1];
   }
 };

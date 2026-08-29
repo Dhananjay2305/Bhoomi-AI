@@ -210,9 +210,9 @@ export const MockDataProvider = ({ children }: { children: ReactNode }) => {
 
   const addDiseaseScan = (scan: DiseaseScanRecord) => {
     setDiseaseHistory(prev => [scan, ...prev].slice(0, 10)); // keep last 10 scans
-    if (scan.result.disease !== 'Healthy') {
-      const alertMsg = `🌿 Plant Health Alert: Possible ${scan.result.disease} detected in ${scan.result.crop} crop. Confidence: ${scan.result.confidence}%`;
-      setAlerts(a => [{ id: crypto.randomUUID(), message: alertMsg, severity: scan.result.severity === 'High Risk' ? 'high' : 'medium', timestamp: new Date().toISOString() }, ...a]);
+    if (scan.result.health_status !== 'Healthy') {
+      const alertMsg = `🌿 Plant Health Alert: Possible ${scan.result.problem || scan.result.disease} detected in ${scan.result.crop} crop. Confidence: ${scan.result.confidence}%`;
+      setAlerts(a => [{ id: crypto.randomUUID(), message: alertMsg, severity: scan.result.severity === 'High' || scan.result.severity === 'Severe' ? 'high' : 'medium', timestamp: new Date().toISOString() }, ...a]);
     }
   };
 
