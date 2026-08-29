@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 
+import { DiseaseScanRecord } from '../services/diseaseService';
+
 export interface SoilData {
   id: string;
   device_id: string;
@@ -78,9 +80,11 @@ interface BhoomiContextType {
     crop: string;
     stage: string;
   };
+  diseaseHistory: DiseaseScanRecord[];
   togglePump: () => void;
   setPumpMode: (mode: 'AUTO' | 'MANUAL') => void;
   analyzeDiseaseImage: () => void;
+  addDiseaseScan: (scan: DiseaseScanRecord) => void;
 }
 
 const BhoomiContext = createContext<BhoomiContextType | undefined>(undefined);
@@ -198,9 +202,18 @@ export const MockDataProvider = ({ children }: { children: ReactNode }) => {
   const [pumpMode, setPumpMode] = useState<'AUTO' | 'MANUAL'>('MANUAL');
   const [weather] = useState<WeatherData>(initialWeather);
   const [farmProfile] = useState({ crop: 'Tomato', stage: 'Vegetative' });
+  const [diseaseHistory, setDiseaseHistory] = useState<DiseaseScanRecord[]>([]);
 
   const togglePump = () => {
     setPumpStatus(prev => prev === 'ON' ? 'OFF' : 'ON');
+  };
+
+  const addDiseaseScan = (scan: DiseaseScanRecord) => {
+    setDiseaseHistory(prev => [scan, ...prev].slice(0, 10)); // keep last 10 scans
+    if (scan.result.disease !== 'Healthy') {
+      const alertMsg = `🌿 Plant Health Alert: Possible ${scan.result.disease} detected in ${scan.result.crop} crop. Confidence: ${scan.result.confidence}%`;
+      setAlerts(a => [{ id: crypto.randomUUID(), message: alertMsg, severity: scan.result.severity === 'High Risk' ? 'high' : 'medium', timestamp: new Date().toISOString() }, ...a]);
+    }
   };
 
   const analyzeDiseaseImage = () => {
@@ -283,7 +296,7 @@ export const MockDataProvider = ({ children }: { children: ReactNode }) => {
   return (
     <BhoomiContext.Provider value={{ 
       latestData, historyData, devices, alerts, recommendations, healthScore,
-      pumpStatus, pumpMode, weather, farmProfile, togglePump, setPumpMode, analyzeDiseaseImage
+      pumpStatus, pumpMode, weather, farmProfile, diseaseHistory, togglePump, setPumpMode, analyzeDiseaseImage, addDiseaseScan
     }}>
       {children}
     </BhoomiContext.Provider>

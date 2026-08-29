@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useBhoomiData } from '../contexts/MockDataProvider';
-import { Mic, Globe, AlertCircle, Sparkles, StopCircle } from 'lucide-react';
+import { Mic, Globe, AlertCircle, Sparkles, StopCircle, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const languages = [
@@ -14,6 +15,7 @@ const languages = [
 
 export default function VoiceAssistantPage() {
   const { latestData, recommendations, weather, pumpStatus } = useBhoomiData();
+  const location = useLocation();
   const [selectedLang, setSelectedLang] = useState(languages[3]); // Default English
   const [isPlaying, setIsPlaying] = useState(false);
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -26,6 +28,12 @@ export default function VoiceAssistantPage() {
     window.speechSynthesis.onvoiceschanged = loadVoices;
   }, []);
 
+  useEffect(() => {
+    if (location.state?.prefilledQuery && conversation.length === 0) {
+      handleAskCustomQuery(location.state.prefilledQuery);
+    }
+  }, [location.state]);
+
   const getTranslatedMessage = () => {
     if (!latestData || !recommendations) return "";
     const m = Math.round(latestData.moisture);
@@ -35,6 +43,36 @@ export default function VoiceAssistantPage() {
     if (selectedLang.code === 'hi-IN') return `आपकी मिट्टी में नमी ${m} प्रतिशत है। बारिश की संभावना ${weather.rainProbability} प्रतिशत है। पंप अभी ${pumpStatus === 'ON' ? 'चालू' : 'बंद'} है। ${recommendations.irrigation === 'Water Now' ? 'तुरंत पानी दें।' : 'आज सिंचाई की आवश्यकता नहीं है।'}`;
     
     return `Soil moisture is at ${m} percent. Rain probability is ${weather.rainProbability} percent. The pump is currently ${pumpStatus}. ${recommendations.irrigationExplanation}`;
+  };
+
+  const handleAskCustomQuery = (query: string) => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    
+    setConversation(prev => [...prev, { role: 'user', text: query }]);
+    setIsTyping(true);
+    
+    setTimeout(() => {
+      // Very basic response simulation for disease queries
+      let text = "I've noted your plant health report. Make sure to isolate the plant and follow the recommended prevention steps to stop it from spreading.";
+      if (query.includes('Blight')) {
+         text = "Blight can spread quickly. I recommend applying a copper-based fungicide as soon as possible and ensuring the leaves stay dry.";
+      }
+      
+      setIsTyping(false);
+      setConversation(prev => [...prev, { role: 'ai', text }]);
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      const voice = voices.find(v => v.lang.startsWith('en-US') || v.lang.startsWith('en-GB'));
+      if (voice) utterance.voice = voice;
+      utterance.lang = 'en-US';
+      
+      utterance.onstart = () => setIsPlaying(true);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
+
+      window.speechSynthesis.speak(utterance);
+    }, 1500);
   };
 
   const handleAskBhoomi = () => {
